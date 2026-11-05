@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-crema: #fbf7f2;
+  --color-marron: #003a70;
+  --color-terracota: #3d003a70;
+  --color-durazno: #ffcb05;
+  --color-rojo: #EE1515;
+
+  --font-sans: "Comic Sans MS", cursive;
+}
+
+* { box-sizing: border-box; }
