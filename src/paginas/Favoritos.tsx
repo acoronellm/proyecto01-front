@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { obtenerPokemon } from '../api';
 import type { Pokemon } from '../types/pokemon';
 import ModalConfirmacion from '../components/ModalConfirmacion';
-
+import EstadoPeticion from '../components/EstadoPeticion';
 interface FavoritosProps {
   favoritos: number[];
   onQuitar: (id: number) => void;
@@ -67,23 +67,48 @@ function Favoritos({ favoritos, onQuitar }: FavoritosProps) {
 
 
   if (cargando && favoritos.length > 0) {
-    return <p role="status">Cargando favoritos...</p>;
+    return (
+      <EstadoPeticion
+        tipo="loading"
+        mensaje="Estamos recuperando tus Pokémon favoritos."
+      />
+    );
   }
 
   if (error) {
-    return <p role="alert">Error: {error}</p>;
+    return (
+      <EstadoPeticion
+        tipo="error"
+        mensaje={error}
+      />
+    );
   }
+
 
   if (favoritos.length === 0) {
     return (
       <section>
-        <h1 className="mb-6 text-3xl font-bold text-rojo">Favoritos</h1>
-        <p>
-          Aún no tienes favoritos. <Link to="/explorar"className="text-rojo">Explorar Pokémon</Link>.
-        </p>
+        <h1 className="mb-6 text-3xl font-bold text-rojo">
+          Favoritos
+        </h1>
+
+        <EstadoPeticion
+          tipo="empty"
+          mensaje="Todavía no has agregado ningún Pokémon a tus favoritos."
+        />
+
+        <div className="mt-4 text-center">
+          <Link
+            to="/explorar"
+            className="inline-flex min-h-11 items-center justify-center rounded-lg bg-terracota px-5 py-3 font-medium text-white hover:opacity-90"
+          >
+            Explorar Pokémon
+          </Link>
+        </div>
       </section>
     );
   }
+
 
 
 
@@ -102,8 +127,7 @@ function Favoritos({ favoritos, onQuitar }: FavoritosProps) {
         {lista.map((pokemon) => (
           <li
             key={pokemon.id}
-            className="flex items-center gap-4 rounded-lg bg-white p-3 shadow-sm"
-          >
+            className="flex flex-wrap items-center gap-3 rounded-lg bg-white p-3 shadow-sm sm:flex-nowrap sm:gap-4"          >
             {pokemon.imagen && (
               <img
                 src={pokemon.imagen}
@@ -115,7 +139,7 @@ function Favoritos({ favoritos, onQuitar }: FavoritosProps) {
 
             <Link
               to={`/detalles/${pokemon.id}`}
-              className="flex-1 font-medium capitalize text-marron"
+              className="min-w-0 flex-1 break-words font-medium capitalize text-marron"
             >
               {pokemon.nombre}
             </Link>

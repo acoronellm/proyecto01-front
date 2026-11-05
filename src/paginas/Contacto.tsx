@@ -1,8 +1,9 @@
 
 import { useState } from "react";
-import type { ChangeEvent, FormEvent } from "react";
+import type { ChangeEvent } from "react";
 import { toast } from 'sonner';
 import ModalConfirmacion from '../components/ModalConfirmacion';
+
 function Contacto() {
     const [form, setForm] = useState({
         nombre: "",
@@ -23,12 +24,11 @@ function Contacto() {
         }));
     }
 
-
     function confirmarEnvio() {
         if (!formularioValido || enviado) return;
 
         setEnviado(true);
-        toast.success('Formulario completado correctamente.');
+        toast.success('Queja registrada en esta demostración.');
     }
 
     const nombreValido = form.nombre.trim().length >= 2;
@@ -41,13 +41,7 @@ function Contacto() {
 
     const formularioValido =
         nombreValido && emailValido && mensajeValido;
-    console.log({
-        nombreValido,
-        emailValido,
-        mensajeValido,
-        formularioValido,
-        enviado
-    });
+
     return (
         <section className="mx-auto max-w-lg rounded-xl bg-white p-6 shadow-md sm:p-8">
 
@@ -83,8 +77,19 @@ function Contacto() {
                         disabled={enviado}
                         required
                         minLength={2}
+                        aria-invalid={form.nombre.length > 0 && !nombreValido}
+                        aria-describedby="ayuda-nombre"
                         className="w-full rounded-lg border border-beige bg-white p-3 focus:outline-none focus:ring-2 focus:ring-terracota"
                     />
+
+                    <p
+                        id="ayuda-nombre"
+                        className="mt-1 text-sm text-gray-700"
+                    >
+                        {form.nombre.length > 0 && !nombreValido
+                            ? 'El nombre debe tener al menos 2 caracteres.'
+                            : 'Escribe tu nombre.'}
+                    </p>
                 </div>
 
                 {/* Correo */}
@@ -105,8 +110,19 @@ function Contacto() {
                         onChange={alCambiar}
                         disabled={enviado}
                         required
+                        aria-invalid={form.email.length > 0 && !emailValido}
+                        aria-describedby="ayuda-email"
                         className="w-full rounded-lg border border-beige bg-white p-3 focus:outline-none focus:ring-2 focus:ring-terracota"
                     />
+
+                    <p
+                        id="ayuda-email"
+                        className="mt-1 text-sm text-gray-700"
+                    >
+                        {form.email.length > 0 && !emailValido
+                            ? 'Ingresa un correo electrónico válido.'
+                            : 'Ejemplo: nombre@correo.com'}
+                    </p>
                 </div>
 
                 {/* Mensaje */}
@@ -128,8 +144,19 @@ function Contacto() {
                         required
                         minLength={10}
                         rows={5}
+                        aria-invalid={form.mensaje.length > 0 && !mensajeValido}
+                        aria-describedby="ayuda-mensaje"
                         className="w-full resize-y rounded-lg border border-beige bg-white p-3 focus:outline-none focus:ring-2 focus:ring-terracota"
                     />
+
+                    <p
+                        id="ayuda-mensaje"
+                        className="mt-1 text-sm text-gray-700"
+                    >
+                        {form.mensaje.length > 0 && !mensajeValido
+                            ? 'El mensaje debe tener al menos 10 caracteres.'
+                            : 'Describe tu queja con al menos 10 caracteres.'}
+                    </p>
                 </div>
 
                 {/* Botón */}
@@ -142,8 +169,6 @@ function Contacto() {
                     disabled={!formularioValido || enviado}
                     darkPattern
                 />
-
-
 
             </form>
         </section>

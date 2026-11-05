@@ -23,14 +23,14 @@ function TarjetaPokemon({ pokemon }: TarjetaPokemonProps) {
         />
       )}
 
-      <h3 className="mt-3 text-xl font-bold capitalize">
+      <h2 className="mt-3 text-xl font-bold capitalize">
         <Link
           to={`/detalles/${pokemon.id}`}
           className="text-marron hover:text-terracota"
         >
           {pokemon.nombre}
         </Link>
-      </h3>
+      </h2>
 
       <div className="mt-2 flex flex-wrap gap-2">
         {pokemon.tipos.map((tipo) => (

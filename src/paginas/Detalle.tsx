@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { obtenerPokemon } from '../api';
 import type { Pokemon } from '../types/pokemon';
 import ModalConfirmacion from '../components/ModalConfirmacion';
+import EstadoPeticion from '../components/EstadoPeticion';
 interface DetalleProps {
   favoritos: number[];
   onToggleFavorito: (id: number) => void;
@@ -48,17 +49,34 @@ function Detalle({ favoritos, onToggleFavorito }: DetalleProps) {
   }, [id]);
 
 
-  if (cargando) {
-    return <p role="status">Cargando Pokémon...</p>;
-  }
 
-  if (error) {
-    return <p role="alert">Error: {error}</p>;
-  }
+if (cargando) {
+  return (
+    <EstadoPeticion
+      tipo="loading"
+      mensaje="Estamos consultando la información del Pokémon."
+    />
+  );
+}
 
-  if (!pokemon) {
-    return <p>No encontramos este Pokémon.</p>;
-  }
+if (error) {
+  return (
+    <EstadoPeticion
+      tipo="error"
+      mensaje={error}
+    />
+  );
+}
+
+if (!pokemon) {
+  return (
+    <EstadoPeticion
+      tipo="empty"
+      mensaje="No encontramos este Pokémon. Verifica el número o intenta con otro."
+    />
+  );
+}
+
 
   const esFavorito = favoritos.includes(pokemon.id);
 

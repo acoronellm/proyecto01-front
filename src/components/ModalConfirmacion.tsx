@@ -69,8 +69,8 @@ function ModalConfirmacion({
                 <p className="mb-6">{mensaje}</p>
 
 
-                <div className="flex items-center justify-end gap-3">
 
+                <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
                     {/*
     DARK PATTERN 
     Se utiliza interferencia visual para favorecer

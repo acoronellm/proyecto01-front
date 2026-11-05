@@ -5,7 +5,7 @@ function Inicio() {
 
   return (
     <section className="flex min-h-[75vh] flex-col items-center justify-center text-center">
-      <h1 className="mb-6 text-8xl font-bold text-rojo">
+      <h1 className="mb-6 text-5xl font-bold text-rojo sm:text-7xl lg:text-8xl">
         Pokedex
       </h1>
 

@@ -6,6 +6,7 @@ import type { PokemonResumen } from '../api';
 import TarjetaPokemon from '../components/Tarjeta';
 import type { Pokemon } from '../types/pokemon';
 import { toast } from 'sonner';
+import EstadoPeticion from '../components/EstadoPeticion';
 function Catalogo() {
   const [pokemones, setPokemones] = useState<Pokemon[]>([]);
   const [tipos, setTipos] = useState<string[]>([]);
@@ -269,13 +270,16 @@ function Catalogo() {
       </div>
 
       {(cargando || cargandoTipo || cargandoDetalles || tipoCargado !== tipo) && !error && (
-        <p role="status">Cargando Pokémon...</p>
-      )}
+        <EstadoPeticion
+          tipo="loading"
+          mensaje="Estamos consultando los datos de la Pokédex."
+        />)}
 
       {error && (
-        <p role="alert" className="text-red-600">
-          {error}
-        </p>
+        <EstadoPeticion
+          tipo="error"
+          mensaje={error}
+        />
       )}
 
       {!cargando && !cargandoTipo && !cargandoDetalles && tipoCargado === tipo && !error && (
@@ -285,7 +289,10 @@ function Catalogo() {
           </p>
 
           {pokemones.length === 0 ? (
-            <p>No encontramos Pokémon con esos criterios.</p>
+            <EstadoPeticion
+              tipo="empty"
+              mensaje="No encontramos Pokémon con esos criterios. Prueba otro nombre o tipo."
+            />
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {pokemones.map((pokemon) => (
@@ -298,17 +305,16 @@ function Catalogo() {
           )}
 
           {totalPaginas > 1 && (
-            <div className="mt-8 flex items-center justify-center gap-4">
-              <button
-                type="button"
-                disabled={paginaActual === 1}
-                onClick={() => setPagina(paginaActual - 1)}
-                className="rounded-lg bg-terracota px-4 py-2 text-white disabled:opacity-40"
-              >
-                Anterior
-              </button>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">              <button
+              type="button"
+              disabled={paginaActual === 1}
+              onClick={() => setPagina(paginaActual - 1)}
+              className="rounded-lg bg-terracota px-4 py-2 text-white disabled:opacity-40"
+            >
+              Anterior
+            </button>
 
-              <span>
+              <span className="text-center text-sm sm:text-base">
                 Página {paginaActual} de {totalPaginas}
               </span>
 
