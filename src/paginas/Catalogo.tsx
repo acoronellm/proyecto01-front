@@ -7,7 +7,15 @@ import TarjetaPokemon from '../components/Tarjeta';
 import type { Pokemon } from '../types/pokemon';
 import { toast } from 'sonner';
 import EstadoPeticion from '../components/EstadoPeticion';
-function Catalogo() {
+interface CatalogoProps {
+  favoritos: number[];
+  toggleFavorito: (id: number) => void;
+}
+
+function Catalogo({
+  favoritos,
+  toggleFavorito
+}: CatalogoProps) {
   const [pokemones, setPokemones] = useState<Pokemon[]>([]);
   const [tipos, setTipos] = useState<string[]>([]);
   const [cargando, setCargando] = useState(true);
@@ -299,6 +307,8 @@ function Catalogo() {
                 <TarjetaPokemon
                   key={pokemon.id}
                   pokemon={pokemon}
+                  esFavorito={favoritos.includes(pokemon.id)}
+                  onToggleFavorito={toggleFavorito}
                 />
               ))}
             </div>

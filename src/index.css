@@ -30,3 +30,19 @@ header :where(a, button):focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Cursor para elementos interactivos */
+@layer base {
+  a,
+  button:not(:disabled),
+  select:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  select:disabled {
+    cursor: not-allowed;
+  }
+}

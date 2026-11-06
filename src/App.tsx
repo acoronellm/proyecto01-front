@@ -48,13 +48,20 @@ function App() {
 
   return (
     <div className="min-h-screen bg-crema text-marron font-sans">
-      
+
       <Navegacion />
       <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8 font-sans">
         <Routes>
           <Route path="/" element={<Inicio />} />
-          <Route path="/explorar" element={<Catalogo />} />
           <Route
+            path="/explorar"
+            element={
+              <Catalogo
+                favoritos={favoritos}
+                toggleFavorito={toggleFavorito}
+              />
+            }
+          />          <Route
             path="/detalles/:id"
             element={
               <Detalle favoritos={favoritos} onToggleFavorito={toggleFavorito} />

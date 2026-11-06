@@ -11,7 +11,6 @@ function Contacto() {
         mensaje: ""
     });
 
-    const [enviado, setEnviado] = useState(false);
 
     function alCambiar(
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -24,12 +23,19 @@ function Contacto() {
         }));
     }
 
-    function confirmarEnvio() {
-        if (!formularioValido || enviado) return;
 
-        setEnviado(true);
+    function confirmarEnvio() {
+        if (!formularioValido) return;
+
         toast.success('Queja registrada en esta demostración.');
+
+        setForm({
+            nombre: '',
+            email: '',
+            mensaje: ''
+        });
     }
+
 
     const nombreValido = form.nombre.trim().length >= 2;
 
@@ -74,7 +80,7 @@ function Contacto() {
                         placeholder="Tu nombre"
                         value={form.nombre}
                         onChange={alCambiar}
-                        disabled={enviado}
+
                         required
                         minLength={2}
                         aria-invalid={form.nombre.length > 0 && !nombreValido}
@@ -108,7 +114,7 @@ function Contacto() {
                         placeholder="nombre@correo.com"
                         value={form.email}
                         onChange={alCambiar}
-                        disabled={enviado}
+
                         required
                         aria-invalid={form.email.length > 0 && !emailValido}
                         aria-describedby="ayuda-email"
@@ -140,7 +146,7 @@ function Contacto() {
                         placeholder="Escribe tu mensaje..."
                         value={form.mensaje}
                         onChange={alCambiar}
-                        disabled={enviado}
+
                         required
                         minLength={10}
                         rows={5}
@@ -166,7 +172,7 @@ function Contacto() {
                     textoBoton="Enviar queja"
                     textoConfirmar="si"
                     onConfirmar={confirmarEnvio}
-                    disabled={!formularioValido || enviado}
+                    disabled={!formularioValido}
                     darkPattern
                 />
 
