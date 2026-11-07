@@ -73,7 +73,7 @@ function ModalConfirmacion({
                 <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
                     {/*
     DARK PATTERN 
-    Se pone en grende el "No, ya lo pense mejor", mientras que el "si" es extremadamente pequeño y de color casi igual fondo, esto para "evitar" que el usuario ponga una queja
+    Se pone en grande y en rojo "No, ya lo pense mejor", mientras que el "si" es extremadamente pequeño y de color casi igual fondo, esto para "evitar" que el usuario ponga una queja
   */}
 
                     <button
