@@ -73,20 +73,7 @@ function ModalConfirmacion({
                 <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
                     {/*
     DARK PATTERN 
-    Se utiliza interferencia visual para favorecer
-    que el usuario cancele el envío de su queja.
-
-    El botón "No, cancelar" se presenta con mayor
-    tamaño, contraste y prominencia visual.
-
-    La opción "Sí, enviar queja" se presenta como
-    texto pequeño y de bajo contraste.
-
-    Esto puede inducir al usuario a desistir de
-    una acción que originalmente quería realizar.
-
-    Es un ejemplo de diseño manipulativo y no
-    debe utilizarse en un servicio real.
+    Se pone en grende el "No, ya lo pense mejor", mientras que el "si" es extremadamente pequeño y de color casi igual fondo, esto para "evitar" que el usuario ponga una queja
   */}
 
                     <button
